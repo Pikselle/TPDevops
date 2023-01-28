@@ -1,0 +1,20 @@
+---
+version: "3"
+services :
+  api :
+    image : api
+    volumes :
+      - ./simple_api/student_age.json:/data/student_age.json
+    ports :
+      - "5000:5000"
+  web :
+    image : php:apache
+    environment :
+      - USERNAME=toto
+      - PASSWORD=python
+    volumes :
+      - ./website:/var/www/html/
+    depends_on :
+      - api
+    ports : 
+      - "8080:80"
